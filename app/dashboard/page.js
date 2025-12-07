@@ -6,6 +6,7 @@ import ArtistsWidgets from "@/componentes/widgets/ArtistsWidget";
 
 export default function DashboardPage() {
   const [accessToken, setAccessToken] = useState(null);
+  const [favArt, setFavArt] = useState([]);
 
   useEffect(() => {
     async function obtenerToken() {
@@ -22,7 +23,7 @@ export default function DashboardPage() {
       if (!resp.ok) return;
 
       setAccessToken(data.access_token); 
-    }
+    } 
 
     obtenerToken();
   }, []);
@@ -34,7 +35,7 @@ export default function DashboardPage() {
   return (
     <div>
       <Header/>
-      <ArtistsWidgets accessToken={accessToken} /> 
+      <ArtistsWidgets accessToken={accessToken} favArt={favArt} SetFavArt={setFavArt} /> 
     </div>
   );
 }

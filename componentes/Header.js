@@ -1,24 +1,24 @@
 import { Headerlinks } from "./data";
-import styles from './Header.module.css';
+import './Header.css';
 
 
 
 const Header = () => {
 
   return (
-    <nav className={styles.header}>
-      <div className={styles.logo}>
+    <nav className= "header">
+      <div className= "logo">
         <p>SPOTYFY</p>
       </div>
 
-      <ul className={styles.menu}>
+      <ul className= "menu">
         {Headerlinks.map((item) => (
           <li key={item.id}>
             <a href={item.link}>{item.title}</a>
           </li>
         ))}
       </ul>
-      <div className={styles.extra}></div>
+      <div className= "extra"></div>
     </nav>
   );
 };

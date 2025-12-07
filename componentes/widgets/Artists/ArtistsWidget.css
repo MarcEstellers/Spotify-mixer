@@ -1,0 +1,88 @@
+/* Contenedor del widget */
+.widget-container {
+  background: #121212;
+  padding: 20px;
+  border-radius: 12px;
+  width: 350px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Título */
+.widget-container h1 {
+  color: #1db954;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Input */
+.widget-container input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #1db954;
+  border-radius: 8px;
+  background: #181818;
+  color: white;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.widget-container input::placeholder {
+  color: #b3b3b3;
+}
+
+/* Lista */
+.widget-container ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.widget-container li {
+  padding: 10px;
+  background: #1e1e1e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between; /* nombre ocupa centro, estrella a la derecha */
+  transition:  0.2s;
+}
+
+.widget-container li:hover {
+  background: #282828;
+}
+
+/* Nombre del artista */
+.widget-container li span {
+  flex: 1; /* ocupa el espacio entre la imagen y el botón */
+}
+
+/* Imágenes de artista */
+.widget-container img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Error */
+.widget-container p {
+  color: #d4e20a;
+  margin-top: 10px;
+}
+
+/* Botón de favorito */
+.fav-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #b3b3b3;
+}
+
+.fav-btn--active {
+  color: #eed705; 
+   font-size: 30px;
+}

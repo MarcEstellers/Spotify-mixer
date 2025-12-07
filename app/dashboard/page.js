@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/componentes/Header";
-import ArtistsWidgets from "@/componentes/widgets/ArtistsWidget";
+import ArtistsWidgets from "@/componentes/widgets/Artists/ArtistsWidget";
+import TraksWidget from "@/componentes/widgets/Traks/TraksWidget";
 
 export default function DashboardPage() {
   const [accessToken, setAccessToken] = useState(null);
   const [favArt, setFavArt] = useState([]);
+  const [favTrak, setFavTrak] = useState([]);
 
   useEffect(() => {
     async function obtenerToken() {
@@ -36,6 +38,7 @@ export default function DashboardPage() {
     <div>
       <Header/>
       <ArtistsWidgets accessToken={accessToken} favArt={favArt} SetFavArt={setFavArt} /> 
+      <TraksWidget  accessToken={accessToken} favTrak={favTrak} SetFavTrak={setFavTrak}/>
     </div>
   );
 }

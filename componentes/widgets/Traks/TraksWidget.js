@@ -1,0 +1,105 @@
+'use client';
+import { useEffect, useState } from "react";
+import "./TraksWidget.css";
+
+export default function TraksWidget({ accessToken, favTrak = [], SetFavTrak }) {
+  const [texto, setTexto] = useState("");
+  const [trak, setTrak] = useState([]);
+  const [error, setError] = useState("");
+
+  // Función para añadir / quitar favoritos
+  const toggleFavorito = (track) => {
+    const yaEsta = favTrak.some((fav) => fav.id === track.id);
+
+    if (yaEsta) {
+      // Lo quitamos
+      SetFavTrak(favTrak.filter((fav) => fav.id !== track.id));
+    } else {
+      // Lo añadimos
+      SetFavTrak([...favTrak, track]);
+    }
+  };
+
+  // Debouncing
+  useEffect(() => {
+    if (!texto.trim()) {
+      setTrak([]);
+      setError("");
+      return;
+    }
+
+    const timeoutId = setTimeout(async () => {
+      try {
+        const url = `https://api.spotify.com/v1/search?type=track&limit=10&q=${encodeURIComponent(
+          texto
+        )}`;
+
+        const res = await fetch(url, {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          setError("Error buscando canciones.");
+          setTrak([]);
+          return;
+        }
+
+        setError("");
+        setTrak(data.tracks.items || []);
+      } catch (err) {
+        setError("Error en la petición.");
+        setTrak([]);
+      }
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [texto, accessToken]);
+
+  return (
+    <div className="tracks-widget">
+      <h1 className="tracks-title">Buscar canciones</h1>
+
+      <input
+        value={texto}
+        onChange={(e) => setTexto(e.target.value)}
+        placeholder="Buscar canción"
+        className="tracks-search-input"
+      />
+
+      {error && <p className="tracks-error">{error}</p>}
+
+      <ul className="tracks-list">
+        {trak.map((c) => {
+          const esFavorito = favTrak.some((fav) => fav.id === c.id);
+          const cover = c.album?.images?.[0]?.url;
+
+          return (
+            <li key={c.id} className="tracks-item">
+              {cover && (
+                <img
+                  src={cover}
+                  alt={c.name}
+                  className="tracks-cover"
+                />
+              )}
+
+              <span className="tracks-name">{c.name}</span>
+
+              <button
+                type="button"
+                className={`tracks-fav-btn ${
+                  esFavorito ? "tracks-fav-btn--active" : ""
+                }`}
+                onClick={() => toggleFavorito(c)}
+              >
+                {esFavorito ? "❤" : "♡"}
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}

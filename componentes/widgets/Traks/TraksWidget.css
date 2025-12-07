@@ -1,5 +1,5 @@
-/* Contenedor del widget */
-.widget-container {
+/* Contenedor principal del widget de tracks */
+.tracks-widget {
   background: #121212;
   padding: 20px;
   border-radius: 12px;
@@ -9,14 +9,14 @@
 }
 
 /* Título */
-.widget-container h1 {
+.tracks-title {
   color: #1db954;
   font-size: 22px;
   margin-bottom: 15px;
 }
 
-/* Input */
-.widget-container input {
+/* Input de búsqueda */
+.tracks-search-input {
   width: 100%;
   padding: 10px;
   border: 2px solid #1db954;
@@ -27,18 +27,19 @@
   margin-bottom: 12px;
 }
 
-.widget-container input::placeholder {
+.tracks-search-input::placeholder {
   color: #b3b3b3;
 }
 
-/* Lista */
-.widget-container ul {
+/* Lista de resultados */
+.tracks-list {
   list-style: none;
   padding: 0;
   margin-top: 15px;
 }
 
-.widget-container li {
+/* Cada canción */
+.tracks-item {
   padding: 10px;
   background: #1e1e1e;
   border-radius: 8px;
@@ -46,42 +47,42 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: space-between; /* nombre ocupa centro, estrella a la derecha */
-  transition:  0.2s;
+  justify-content: space-between;
+  transition: background 0.2s;
 }
 
-.widget-container li:hover {
+.tracks-item:hover {
   background: #282828;
 }
 
-/* Nombre del artista */
-.widget-container li span {
-  flex: 1; /* ocupa el espacio entre la imagen y el botón */
-}
-
-/* Imágenes de artista */
-.widget-container img {
+/* Portada de la canción */
+.tracks-cover {
   width: 45px;
   height: 45px;
-  border-radius: 50%;
+  border-radius: 6px;
   object-fit: cover;
 }
 
-/* Error */
-.widget-container p {
+/* Nombre de la canción */
+.tracks-name {
+  flex: 1;
+}
+
+/* Mensaje de error */
+.tracks-error {
   color: #ff4f4f;
   margin-top: 10px;
 }
 
-/* Botón de favorito */
-.fav-btn {
+/* Botón de favorito (corazón) */
+.tracks-fav-btn {
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 20px;
   color: #b3b3b3;
 }
 
-.fav-btn--active {
-  color: #ccc04f; /* verde Spotify cuando es favorito */
+.tracks-fav-btn--active {
+  color: #b91d1d; /* verde Spotify cuando es favorito */
 }

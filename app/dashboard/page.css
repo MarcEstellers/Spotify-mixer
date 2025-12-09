@@ -20,25 +20,106 @@ html, body, #__next, .dashboard-page {
 
 
 .dashboard-right {
-  flex: 0 0 35%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  box-sizing: border-box;
+  flex: 100%;            /* ancho fijo de la columna derecha (ajusta si quieres) */
+  padding: 16px;           /* para que playlist_generator pueda estirarse */
 }
 
-.hola-widget {
+/* ---- PLAYLIST GENERATOR OCUPA TODO EL ALTO DE LA COLUMNA DERECHA ---- */
+
+.playlist_generator {
+  flex: 1;                    /* ocupa TODO el alto disponible en .dashboard-right */
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+/* Botón arriba, lista ocupa el resto del div */
+.playlist_generator .generate-button {
+  align-self: stretch;
+  margin-bottom: 0.5rem;
+  background-color: #1db954;
+  border-radius: 8px;
+  padding: 20px;
+  
+}
+
+/* ---- LA LISTA LLENA EL DIV Y HACE SCROLL SI HAY MUCHAS CANCIONES ---- */
+
+.playlist-list {
+  flex: 1;                    /* llena TODO el espacio que queda en playlist_generator */
+  overflow-y: auto;           /* scroll interno cuando haya muchas canciones */
+}
+
+/* UL de canciones */
+.playlist-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Cada canción ocupa todo el ancho del div */
+.playlist-item {
   width: 100%;
-  height: 100%;
-  background-color: #1db954; /* verde para distinguir */
-  color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
-  border-radius: 12px;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
+  gap: 0.75rem;
+  background-color: #181818;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
 }
 
+/* Portada */
+.playlist-cover {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Info (título + artista) */
+.playlist-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.playlist-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-artists {
+  font-size: 0.8rem;
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botón eliminar */
+.playlist-remove-button {
+  background: transparent;
+  border: 1px solid #1db954;
+  color: #1db954;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+  margin-left: 0.5rem;
+}
+
+.playlist-remove-button:hover {
+  background: #1db954;
+  color: #000000;
+  transform: translateY(-1px);
+}

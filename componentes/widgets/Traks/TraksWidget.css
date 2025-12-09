@@ -61,16 +61,6 @@
   transform: scale(1.01);
 }
 
-/* Track seleccionado — mismo estilo que artistas */
-.selectedTrack {
-  background: #1db95433;
-  border: 1px solid #1DB954;
-}
-
-.selectedTrack:hover {
-  background: #1db95433;
-}
-
 /* ====== IMAGEN DEL COVER ====== */
 .tracks-cover {
   width: 50px;

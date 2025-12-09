@@ -1,0 +1,249 @@
+/* Contenedor principal */
+.playlistDisplay {
+  background: #121212;
+  border-radius: 16px;
+  padding: 24px;
+  color: #f5f5f5;
+ 
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Caja de añadir canciones */
+.playlistAddBox {
+  background: #181818;
+  border-radius: 12px;
+  padding: 16px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+}
+
+.playlistAddBox h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Input de búsqueda */
+.playlistSearchInput {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #181818;
+  color: #f5f5f5;
+  outline: none;
+  border : 2px #1db954;
+  font-size: 0.9rem;
+
+}
+
+.playlistSearchInput::placeholder {
+  color: rgba(245, 245, 245, 0.5);
+}
+
+.playlistSearchInput:focus {
+  border-color: #1db954;
+  box-shadow: 0 0 0 1px rgba(29, 185, 84, 0.4);
+  background: #181818;
+  border: 2px;
+}
+
+/* Resultados de búsqueda */
+.playlistResultsBox {
+  margin-top: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scroll minimalista */
+.playlistResultsBox::-webkit-scrollbar {
+  width: 6px;
+}
+.playlistResultsBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+.playlistResultsBox::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+/* Item de resultado */
+.playlistResultItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 6px;
+
+}
+
+.playlistResultItem img {
+  border-radius: 8px;
+}
+
+.playlistResultItem div {
+  flex: 1;
+  overflow: hidden;
+}
+
+.playlistResultItem p {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlistResultItem p:first-child {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.playlistResultItem p:last-child {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.playlistResultItem button {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #1db954;
+  color: #181818;
+  font-weight: 600;
+ 
+}
+
+.playlistResultItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+.playlistResultItem button:hover {
+  background: #1ed760;
+  transform: scale(1.03);
+}
+
+/* Título y botón de mostrar/ocultar */
+.playlistDisplay h2 {
+  margin: 4px 0 0;
+  font-size: 1.1rem;
+}
+
+.botonPlaylist {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: #f5f5f5;
+  font-size: 0.9rem;
+  cursor: pointer;
+ 
+}
+
+.botonPlaylist:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Lista de canciones */
+.listaPlaylist {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.listaPlaylist p {
+  margin: 0;
+}
+
+/* Cada track */
+.trackItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  
+}
+
+.trackItem img {
+  border-radius: 10px;
+}
+
+.trackItem:hover {
+  background: #1d222c;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Info de la canción */
+.trackItem .info {
+  flex: 1;
+  min-width: 0; /* para que el ellipsis funcione */
+}
+
+.trackItem .titulo {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.trackItem .artista {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botón eliminar */
+.botoneliminar {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #e64949;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.botoneliminar:hover {
+  background: #ff5c5c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(230, 73, 73, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .playlistDisplay {
+    padding: 16px;
+  }
+
+  .trackItem {
+    padding: 8px;
+  }
+
+  .trackItem img {
+    width: 70px;
+  }
+}

@@ -123,3 +123,9 @@ html, body, #__next, .dashboard-page {
   color: #000000;
   transform: translateY(-1px);
 }
+
+.botonGenerar {
+    background: #1db954;
+    padding: 14px;
+    border-radius: 14px;
+}

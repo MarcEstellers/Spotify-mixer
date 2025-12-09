@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import "./TraksWidget.css";
 
-export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTrak, setFiltTrak }) {
+export default function TraksWidget({ accessToken, favTrak, SetFavTrak }) {
   const [texto, setTexto] = useState("");
   const [trak, setTrak] = useState([]);
   const [error, setError] = useState("");
- useEffect( () => {
-        localStorage.setItem("favoritos canciones", JSON.stringify(favTrak));
-        console.log({favTrak})
-    }, [favTrak]);   //cada vez que modifico favoritas lo añado al local storage
+
+  useEffect(() => {
+    localStorage.setItem("favoritos canciones", JSON.stringify(favTrak));
+    console.log({ favTrak });
+  }, [favTrak]); //cada vez que modifico favoritas lo añado al local storage
 
   // Función para añadir / quitar favoritos
   const toggleFavorito = (cancion) => {
@@ -23,15 +24,6 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
       SetFavTrak([...favTrak, cancion]);
     }
   };
-
-
-  const toggleFiltroTraks = (trak) => {
-  if (filtTrak.includes(trak.id)) {
-    setFiltTrak(filtTrak.filter(id => id !== trak.id));
-  } else {
-    setFiltTrak([...filtTrak, trak.id]);
-  }
-};
 
   // Debouncing
   useEffect(() => {
@@ -72,7 +64,7 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
 
   return (
     <div className="tracks-widget">
-      <h2 className="tracks-title">Buscar canciones 🎧 </h2>
+      <h2 className="tracks-title">Buscar canciones</h2>
 
       <input
         value={texto}
@@ -89,10 +81,10 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
           const cover = c.album?.images?.[0]?.url;
 
           return (
-            <button
+            <li
               key={c.id}
-              className={`tracks-item ${filtTrak.includes(c.id) ? "selectedTrack" : ""}`}
-              onClick={() => toggleFiltroTraks(c)}
+              className={`tracks-item`}
+              
             >
               {cover && (
                 <img
@@ -105,17 +97,19 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
               <span className="tracks-name">{c.name}</span>
 
               {/* Botón de favorito sin interferir en la selección */}
-              <span
+              <button
                 type="button"
-                className={`tracks-fav-btn ${esFavorito ? "tracks-fav-btn--active" : ""}`}
+                className={`tracks-fav-btn ${
+                  esFavorito ? "tracks-fav-btn--active" : ""
+                }`}
                 onClick={(e) => {
                   e.stopPropagation(); // evita seleccionar el track
                   toggleFavorito(c);
                 }}
               >
                 {esFavorito ? "❤" : "♡"}
-              </span>
-            </button>
+              </button>
+            </li>
           );
         })}
       </ul>

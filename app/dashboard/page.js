@@ -16,11 +16,13 @@ export default function DashboardPage() {
   const [favArt, setFavArt] = useState([]);
   const [favTrak, setFavTrak] = useState([]);
   const [filtArt, setFiltArtistas] = useState([]);
-  const [filtTrak, setFiltTrak] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedDecades, setSelectedDecades] = useState([]);
   const [selectedPopularity, setSelectedPopularity] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+
+  const [songSearch, setSongSearch] = useState("");
+  const [songResults, setSongResults] = useState([]);
   
 
   useEffect(() => {
@@ -70,6 +72,32 @@ export default function DashboardPage() {
     }
   };
 
+
+const buscarCancionesPlaylist = async (texto) => {
+  if (!texto.trim()) {
+    setSongResults([]);
+    return;
+  }
+
+  const res = await fetch(
+    `https://api.spotify.com/v1/search?type=track&limit=10&q=${encodeURIComponent(texto)}`,
+    {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }
+  );
+
+  const data = await res.json();
+  setSongResults(data.tracks?.items || []);
+};
+
+
+const añadirCancionManual = (track) => {
+  const yaEsta = playlist.some(p => p.id === track.id);
+  if (yaEsta) return; // evita duplicados
+
+  setPlaylist([...playlist, track]);
+};
+
   return (
     <div>
       <Header />
@@ -87,8 +115,6 @@ export default function DashboardPage() {
             accessToken={accessToken}
             favTrak={favTrak}
             SetFavTrak={setFavTrak}
-            filtTrak={filtTrak}
-            setFiltTrak={setFiltTrak}
           />
           <GenresWidget
             selectedGenres={selectedGenres}
@@ -107,7 +133,16 @@ export default function DashboardPage() {
         <div className="dashboard-right">
           <div className="playlist_generator">
             <button onClick={generacionPlaylist} className="botonGenerar"> Generar Playlist</button>
-            <PlaylistDisplay playlist={playlist} setPlaylist={setPlaylist}/>
+            
+            <PlaylistDisplay 
+                playlist={playlist}
+                setPlaylist={setPlaylist}
+                songSearch={songSearch}
+                setSongSearch={setSongSearch}
+                songResults={songResults}
+                buscarCancionesPlaylist={buscarCancionesPlaylist}
+                añadirCancionManual={añadirCancionManual}
+              />
               </div>
           </div>
         </div>

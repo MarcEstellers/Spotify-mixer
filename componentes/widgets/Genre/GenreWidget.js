@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import './GenreWidget.css'
+import './GenreWidget.css';
 
 const Generos = [
   'acoustic','afrobeat','alt-rock','alternative','ambient','anime','black-metal','bluegrass','blues','bossanova',
@@ -17,16 +17,21 @@ const Generos = [
   'trance','trip-hop','turkish','work-out','world-music'
 ];
 
-export default function GenresWidget() {
+export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
   const [search, setSearch] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [filteredGenres, setFilteredGenres] = useState(Generos);
 
-
+  // Filtrado con debounce
+  useEffect(() => {
+    if (!search.trim()) {
+      setFilteredGenres(Generos);
+      return;
+    }
 
     const timeoutId = setTimeout(() => {
-      const filtered = Generos
-        .filter((g) => g.toLowerCase().includes(encodeURIComponent(search.toLowerCase())))
-        .slice(0, 5); // max 5 resultados
+      const filtered = Generos.filter((g) =>
+        g.toLowerCase().includes(encodeURIComponent(search.toLowerCase()))
+      );
       setFilteredGenres(filtered);
     }, 300);
 
@@ -43,7 +48,7 @@ export default function GenresWidget() {
 
   return (
     <div className="genres-widget">
-      <h2>Filtrar por género</h2>
+      <h2 className="labelFiltoGen"> Filtrar por género 🎹</h2>
       <input
         type="text"
         placeholder="Buscar género..."
@@ -64,4 +69,4 @@ export default function GenresWidget() {
       </div>
     </div>
   );
-}
+};

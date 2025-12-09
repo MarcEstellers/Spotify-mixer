@@ -72,7 +72,7 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
 
   return (
     <div className="tracks-widget">
-      <h1 className="tracks-title">Buscar canciones</h1>
+      <h2 className="tracks-title">Buscar canciones 🎧 </h2>
 
       <input
         value={texto}
@@ -105,7 +105,7 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
               <span className="tracks-name">{c.name}</span>
 
               {/* Botón de favorito sin interferir en la selección */}
-              <button
+              <span
                 type="button"
                 className={`tracks-fav-btn ${esFavorito ? "tracks-fav-btn--active" : ""}`}
                 onClick={(e) => {
@@ -114,7 +114,7 @@ export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTra
                 }}
               >
                 {esFavorito ? "❤" : "♡"}
-              </button>
+              </span>
             </button>
           );
         })}

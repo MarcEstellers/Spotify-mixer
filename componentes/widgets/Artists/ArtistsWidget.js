@@ -78,7 +78,7 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt, filtArt
 
   return (
     <div className="widget-container">
-      <h1>Buscar artistas</h1>
+      <h2>Buscar artistas 🎤</h2>
 
       <input
         value={texto}
@@ -105,7 +105,7 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt, filtArt
               <span>{a.name}</span>
 
               {/* Botón de favorito SIN <button> dentro del botón padre */}
-              <button
+              <span
                 className={`fav-btn ${esFavorito ? "fav-btn--active" : ""}`}
                 onClick={(e) => {
                   e.stopPropagation(); // evita activar el botón del artista
@@ -113,7 +113,7 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt, filtArt
                 }}
               >
                 {esFavorito ? "★" : "☆"}
-              </button>
+              </span>
             </button>
           );
         })}

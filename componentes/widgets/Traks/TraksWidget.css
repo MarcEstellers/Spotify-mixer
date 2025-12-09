@@ -3,24 +3,26 @@
   background: #121212;
   padding: 20px;
   border-radius: 12px;
-  width: 350px;
+  width: 100%;          /* Cambiado de 350px a 100% */
+  max-width: 100%;      /* No se desborde */
+  box-sizing: border-box; /* Incluye padding en el ancho total */
   color: white;
   font-family: Arial, sans-serif;
 }
 
 /* Título */
 .tracks-title {
+  margin-bottom: 16px; /* más separación del input */
   color: #1db954;
-  font-size: 22px;
-  margin-bottom: 15px;
+  font-size: 18px;
 }
 
 /* Input de búsqueda */
 .tracks-search-input {
-  width: 100%;
+  width: 100%;           /* Se adapta al contenedor */
   padding: 10px;
   border: 2px solid #1db954;
-  border-radius: 8px;
+  border-radius: 14px;
   background: #181818;
   color: white;
   outline: none;
@@ -37,20 +39,20 @@
   padding: 0;
   margin-top: 15px;
 }
+
 /* ====== CONTENEDOR DEL BOTÓN (TRACK ENTERO ES CLICABLE) ====== */
 .tracks-item {
   display: flex;
   align-items: center;
   gap: 12px;
-
-  width: 100%;
+  width: 100%;          /* Ocupar todo el ancho disponible */
   padding: 12px 16px;
   margin-bottom: 10px;
-
   background: #181818;
   border: none;
   border-radius: 14px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 /* Hover suave */
@@ -75,6 +77,7 @@
   height: 50px;
   object-fit: cover;
   border-radius: 8px; /* bordes suaves */
+  flex-shrink: 0;     /* evita que la imagen se reduzca */
 }
 
 /* ====== NOMBRE DEL TRACK ====== */
@@ -82,6 +85,7 @@
   color: white;
   font-size: 15px;
   font-weight: 500;
+  flex: 1;            /* ocupa el espacio disponible entre cover y favorito */
 }
 
 /* ====== BOTÓN DEL FAVORITO ====== */

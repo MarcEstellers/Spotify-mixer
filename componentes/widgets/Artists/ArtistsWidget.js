@@ -2,10 +2,18 @@
 import { useEffect, useState } from "react";
 import "./ArtistsWidget.css";
 
-export default function ArtistsWidgets({ accessToken, favArt, SetFavArt }) {
+export default function ArtistsWidgets({ accessToken, favArt, SetFavArt, filtArt, setFiltArtistas }) {
   const [texto, setTexto] = useState("");
   const [artistas, setArtistas] = useState([]);
   const [error, setError] = useState("");
+
+
+
+ useEffect( () => {
+        localStorage.setItem("favoritos Artistas", JSON.stringify(favArt));
+        console.log({favArt})
+    }, [favArt]);   //cada vez que modifico favoritas lo añado al local storage
+
 
   // Función para añadir / quitar favoritos
   const toggleFavorito = (artist) => {
@@ -20,6 +28,16 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt }) {
       SetFavArt([...favArt, artist]);
     }
   };
+
+
+ const toggleFiltroArtistas = (artista) => {
+  if (filtArt.includes(artista.id)) {
+    setFiltArtistas(filtArt.filter(id => id !== artista.id));
+  } else {
+    setFiltArtistas([...filtArt, artista.id]);
+  }
+};
+
 
   // Debouncing
   useEffect(() => {
@@ -75,18 +93,28 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt }) {
           const esFavorito = favArt.some((fav) => fav.id === a.id);
 
           return (
-            <li key={a.id}>
+            <button
+              key={a.id}
+              className={`filtoArt ${filtArt.includes(a.id) ? "selectedArt" : ""}`}
+              onClick={() => toggleFiltroArtistas(a)}
+            >
               {a.images[0] && (
                 <img src={a.images[0].url} alt={a.name} />
               )}
+
               <span>{a.name}</span>
+
+              {/* Botón de favorito SIN <button> dentro del botón padre */}
               <button
-                type="button"
                 className={`fav-btn ${esFavorito ? "fav-btn--active" : ""}`}
-                onClick={() => toggleFavorito(a)} >
+                onClick={(e) => {
+                  e.stopPropagation(); // evita activar el botón del artista
+                  toggleFavorito(a);
+                }}
+              >
                 {esFavorito ? "★" : "☆"}
               </button>
-            </li>
+            </button>
           );
         })}
       </ul>

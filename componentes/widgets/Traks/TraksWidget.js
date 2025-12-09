@@ -2,23 +2,36 @@
 import { useEffect, useState } from "react";
 import "./TraksWidget.css";
 
-export default function TraksWidget({ accessToken, favTrak = [], SetFavTrak }) {
+export default function TraksWidget({ accessToken, favTrak , SetFavTrak, filtTrak, setFiltTrak }) {
   const [texto, setTexto] = useState("");
   const [trak, setTrak] = useState([]);
   const [error, setError] = useState("");
+ useEffect( () => {
+        localStorage.setItem("favoritos canciones", JSON.stringify(favTrak));
+        console.log({favTrak})
+    }, [favTrak]);   //cada vez que modifico favoritas lo añado al local storage
 
   // Función para añadir / quitar favoritos
-  const toggleFavorito = (track) => {
-    const yaEsta = favTrak.some((fav) => fav.id === track.id);
+  const toggleFavorito = (cancion) => {
+    const yaEsta = favTrak.some((fav) => fav.id === cancion.id);
 
     if (yaEsta) {
       // Lo quitamos
-      SetFavTrak(favTrak.filter((fav) => fav.id !== track.id));
+      SetFavTrak(favTrak.filter((fav) => fav.id !== cancion.id));
     } else {
       // Lo añadimos
-      SetFavTrak([...favTrak, track]);
+      SetFavTrak([...favTrak, cancion]);
     }
   };
+
+
+  const toggleFiltroTraks = (trak) => {
+  if (filtTrak.includes(trak.id)) {
+    setFiltTrak(filtTrak.filter(id => id !== trak.id));
+  } else {
+    setFiltTrak([...filtTrak, trak.id]);
+  }
+};
 
   // Debouncing
   useEffect(() => {
@@ -76,7 +89,11 @@ export default function TraksWidget({ accessToken, favTrak = [], SetFavTrak }) {
           const cover = c.album?.images?.[0]?.url;
 
           return (
-            <li key={c.id} className="tracks-item">
+            <button
+              key={c.id}
+              className={`tracks-item ${filtTrak.includes(c.id) ? "selectedTrack" : ""}`}
+              onClick={() => toggleFiltroTraks(c)}
+            >
               {cover && (
                 <img
                   src={cover}
@@ -87,16 +104,18 @@ export default function TraksWidget({ accessToken, favTrak = [], SetFavTrak }) {
 
               <span className="tracks-name">{c.name}</span>
 
+              {/* Botón de favorito sin interferir en la selección */}
               <button
                 type="button"
-                className={`tracks-fav-btn ${
-                  esFavorito ? "tracks-fav-btn--active" : ""
-                }`}
-                onClick={() => toggleFavorito(c)}
+                className={`tracks-fav-btn ${esFavorito ? "tracks-fav-btn--active" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation(); // evita seleccionar el track
+                  toggleFavorito(c);
+                }}
               >
                 {esFavorito ? "❤" : "♡"}
               </button>
-            </li>
+            </button>
           );
         })}
       </ul>

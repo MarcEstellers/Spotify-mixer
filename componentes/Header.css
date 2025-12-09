@@ -21,22 +21,37 @@
 .menu {
   list-style: none;
   display: flex;
-  gap: 300px;
+  gap: 20px; /* reducimos el gap para que no sea tan grande */
   margin: 0;
   padding: 0;
-  
 }
 
-.menu a {
-  color: black;
-  text-decoration: none;
-    
+.menu li {
+  display: inline-block;
 }
 
-.menu a:hover {
-  text-decoration: underline;
+/* Botones del header */
+.menu-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #189945; /* blanco para contrastar con el header */
+  color: rgb(168, 168, 168);
+  font-weight: 500;
+  cursor: pointer;
+
 }
 
+.menu-btn:hover {
+  background-color: #2e3a33;
+  transform: scale(1.05);
+}
+
+/* Para marcar el botón activo (opcional) */
+.menu-btn.active {
+  background-color: #2e3a33;
+  color: #1db954;
+}
 
 body {
   margin: 0;

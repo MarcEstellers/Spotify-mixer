@@ -1,0 +1,54 @@
+.genres-widget {
+  margin: 20px 0;
+}
+
+.genres-widget h2 {
+  margin-bottom: 8px;
+  color: white;
+  font-size: 18px;
+}
+
+.genres-widget input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.genres-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto; /* scroll horizontal */
+  padding-bottom: 4px;
+}
+
+.genres-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.genres-container::-webkit-scrollbar-thumb {
+  background-color: #1db954;
+  border-radius: 3px;
+}
+
+.genre-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 14px;
+  background-color: #181818;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.genre-btn:hover {
+  background-color: #232323;
+  transform: scale(1.05);
+}
+
+.genre-btn.selected {
+  background-color: #1db95433;
+  border: 1px solid #1DB954;
+}

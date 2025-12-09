@@ -11,14 +11,22 @@ const Header = () => {
         <p>SPOTYFY</p>
       </div>
 
-      <ul className= "menu">
+            <ul className="menu">
         {Headerlinks.map((item) => (
           <li key={item.id}>
-            <a href={item.link}>{item.title}</a>
+            <button
+              className="menu-btn"
+              onClick={() => {
+                // Si quieres navegación:
+                window.location.href = item.link;
+              }}
+            >
+              {item.title}
+            </button>
           </li>
         ))}
       </ul>
-      <div className= "extra"></div>
+      <div className="extra"></div>
     </nav>
   );
 };

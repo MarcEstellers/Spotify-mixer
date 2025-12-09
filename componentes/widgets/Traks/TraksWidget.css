@@ -37,52 +37,65 @@
   padding: 0;
   margin-top: 15px;
 }
-
-/* Cada canción */
+/* ====== CONTENEDOR DEL BOTÓN (TRACK ENTERO ES CLICABLE) ====== */
 .tracks-item {
-  padding: 10px;
-  background: #1e1e1e;
-  border-radius: 8px;
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  justify-content: space-between;
-  transition: background 0.2s;
-}
+  gap: 12px;
 
-.tracks-item:hover {
-  background: #282828;
-}
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 10px;
 
-/* Portada de la canción */
-.tracks-cover {
-  width: 45px;
-  height: 45px;
-  border-radius: 6px;
-  object-fit: cover;
-}
-
-/* Nombre de la canción */
-.tracks-name {
-  flex: 1;
-}
-
-/* Mensaje de error */
-.tracks-error {
-  color: #ff4f4f;
-  margin-top: 10px;
-}
-
-/* Botón de favorito (corazón) */
-.tracks-fav-btn {
-  background: transparent;
+  background: #181818;
   border: none;
+  border-radius: 14px;
   cursor: pointer;
-  font-size: 20px;
-  color: #b3b3b3;
 }
 
+/* Hover suave */
+.tracks-item:hover {
+  background: #232323;
+  transform: scale(1.01);
+}
+
+/* Track seleccionado — mismo estilo que artistas */
+.selectedTrack {
+  background: #1db95433;
+  border: 1px solid #1DB954;
+}
+
+.selectedTrack:hover {
+  background: #1db95433;
+}
+
+/* ====== IMAGEN DEL COVER ====== */
+.tracks-cover {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px; /* bordes suaves */
+}
+
+/* ====== NOMBRE DEL TRACK ====== */
+.tracks-name {
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* ====== BOTÓN DEL FAVORITO ====== */
+.tracks-fav-btn {
+  margin-left: auto; /* empuja el corazón a la derecha */
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+/* Corazón activo (más grande y color Spotify dorado) */
 .tracks-fav-btn--active {
-  color: #b91d1d; /* verde Spotify cuando es favorito */
+  color: #e20202;
+  font-size: 25px;
 }

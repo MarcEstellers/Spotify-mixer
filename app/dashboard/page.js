@@ -91,9 +91,10 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <Header />
 
-      <div className="flex flex-1 pt-16"> {/* separa fall del header fixed */}
+      {/* Dashboard Container */}
+      <div className="flex flex-col lg:flex-row flex-1 pt-16 gap-4 px-4">
         {/* LEFT PANEL */}
-        <div className="w-2/3 p-4 flex flex-col gap-4 overflow-y-auto">
+        <div className="lg:w-2/3 flex flex-col gap-4 overflow-y-auto">
           <ArtistsWidgets
             accessToken={accessToken}
             favArt={favArt}
@@ -125,7 +126,7 @@ export default function DashboardPage() {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="w-1/3 p-4">
+        <div className="lg:w-1/3 flex flex-col gap-4">
           <div className="flex flex-col h-full bg-neutral-900 rounded-xl p-4 gap-4">
             <button
               onClick={generacionPlaylist}

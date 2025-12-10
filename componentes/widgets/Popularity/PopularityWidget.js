@@ -1,67 +1,61 @@
-'use client';
 import { useState } from "react";
-import './PopularityWidget.css';
 
 const PopularityRanges = [
-  { id: 'mainstream', label: 'Mainstream', range: [80, 100] },
-  { id: 'popular', label: 'Popular', range: [50, 80] },
-  { id: 'underground', label: 'Underground', range: [0, 50] }
+  { id: "mainstream", label: "Mainstream", range: [80, 100] },
+  { id: "popular", label: "Popular", range: [50, 80] },
+  { id: "underground", label: "Underground", range: [0, 50] },
 ];
 
 export default function PopularityWidget({ selectedPopularity, setSelectedPopularity }) {
   const [popularityValue, setPopularityValue] = useState(50);
 
-    const togglePopularity = (rangeId) => {
-    setSelectedPopularity([rangeId]); // reemplaza todo por solo la opción clickeada
-    const range = PopularityRanges.find(r => r.id === rangeId).range;
-    // Ajustar slider al rango medio de la opción
+  const togglePopularity = (rangeId) => {
+    setSelectedPopularity([rangeId]);
+    const range = PopularityRanges.find((r) => r.id === rangeId).range;
     setPopularityValue(Math.floor((range[0] + range[1]) / 2));
-    };
-
+  };
 
   const handleSliderChange = (e) => {
-  const value = Number(e.target.value);
-  setPopularityValue(value);
-
-  // Encontrar rango correspondiente
-  const matchedRange = PopularityRanges.find(r => value >= r.range[0] && value <= r.range[1]);
-  if (matchedRange) {
-    setSelectedPopularity([matchedRange.id]); // solo una opción
-  }
-};
-
-
-  // Calcular el porcentaje para el fondo
-  const sliderBackground = {
-    background: `linear-gradient(to right, #1db954 0%, #1db954 ${popularityValue}%, #181818 ${popularityValue}%, #181818 100%)`
+    const value = Number(e.target.value);
+    setPopularityValue(value);
+    const matchedRange = PopularityRanges.find((r) => value >= r.range[0] && value <= r.range[1]);
+    if (matchedRange) {
+      setSelectedPopularity([matchedRange.id]);
+    }
   };
 
   return (
-    <div className="popularity-widget">
-      <h2>Filtrar por Popularidad 🔥</h2>
+    <div className="bg-[#121212] p-6 rounded-xl text-white flex flex-col gap-5 shadow-md border border-white/5">
+      <h2 className="text-xl font-semibold text-[#1db954]">Filtrar por Popularidad 🔥</h2>
 
-      <div className="popularity-container">
+      <div className="flex gap-3 overflow-x-auto pb-1 no-scrollbar">
         {PopularityRanges.map((p) => (
           <button
             key={p.id}
-            className={`popularity-btn ${selectedPopularity.includes(p.id) ? "selected" : ""}`}
             onClick={() => togglePopularity(p.id)}
+            className={`px-4 py-3 rounded-xl whitespace-nowrap transition-transform duration-150 flex-shrink-0 border
+              ${selectedPopularity.includes(p.id)
+                ? "bg-[#1db95433] border-[#1db954]"
+                : "bg-[#181818] border-transparent hover:bg-[#232323]"}`}
           >
             {p.label}
           </button>
         ))}
       </div>
 
-      <div className="popularity-slider">
-        <label htmlFor="popularityRange">Popularidad: {popularityValue}</label>
+      <div className="flex flex-col gap-2">
+        <label className="text-sm font-medium">Popularidad: {popularityValue}</label>
+
         <input
           type="range"
-          id="popularityRange"
           min="0"
           max="100"
           value={popularityValue}
           onChange={handleSliderChange}
-          style={sliderBackground}
+          className="w-full h-2 rounded-lg appearance-none cursor-pointer bg-[#181818]"
+          style={{
+            background: `linear-gradient(to right, #1db954 0%, #1db954 ${popularityValue}%, #181818 ${popularityValue}%, #181818 100%)`,
+          }}
         />
       </div>
     </div>

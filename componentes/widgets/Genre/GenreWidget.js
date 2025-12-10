@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from "react";
-import './GenreWidget.css';
 
 const Generos = [
   'acoustic','afrobeat','alt-rock','alternative','ambient','anime','black-metal','bluegrass','blues','bossanova',
@@ -21,7 +20,7 @@ export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
   const [search, setSearch] = useState("");
   const [filteredGenres, setFilteredGenres] = useState(Generos);
 
-  // Filtrado con debounce
+  // Debounce filter
   useEffect(() => {
     if (!search.trim()) {
       setFilteredGenres(Generos);
@@ -30,7 +29,7 @@ export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
 
     const timeoutId = setTimeout(() => {
       const filtered = Generos.filter((g) =>
-        g.toLowerCase().includes(encodeURIComponent(search.toLowerCase()))
+        g.toLowerCase().includes(search.toLowerCase())
       );
       setFilteredGenres(filtered);
     }, 300);
@@ -47,21 +46,31 @@ export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
   };
 
   return (
-    <div className="genres-widget">
-      <h2 className="labelFiltoGen"> Filtrar por género 🎹</h2>
+    <div className="bg-[#121212] p-5 rounded-xl box-border">
+      <h2 className="text-[#1db954] text-lg mb-4">Filtrar por género 🎹</h2>
+
       <input
         type="text"
         placeholder="Buscar género..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        className="w-full p-3 mb-4 rounded-xl border-2 border-[#1db954] bg-[#181818] text-white outline-none"
       />
 
-      <div className="genres-container">
+      <div className="flex gap-4 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-[#1db954] scrollbar-track-transparent">
         {filteredGenres.map((g) => (
           <button
             key={g}
-            className={`genre-btn ${selectedGenres.includes(g) ? "selected" : ""}`}
             onClick={() => toggleGenre(g)}
+            className={`
+              flex-shrink-0 px-5 py-3 rounded-xl text-white bg-[#181818]
+              cursor-pointer transition transform
+              hover:bg-[#232323] hover:scale-105
+              ${selectedGenres.includes(g)
+                ? "bg-[#1db95433] border border-[#1db954]"
+                : ""
+              }
+            `}
           >
             {g}
           </button>
@@ -69,4 +78,4 @@ export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
       </div>
     </div>
   );
-};
+}

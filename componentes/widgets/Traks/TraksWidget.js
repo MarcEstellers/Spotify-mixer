@@ -17,7 +17,7 @@ export default function TraksWidget({ accessToken, favTrak, SetFavTrak }) {
   };
 
   useEffect(() => {
-    if (!texto.trim()) {
+    if (!texto) {
       setTrak([]);
       setError("");
       return;

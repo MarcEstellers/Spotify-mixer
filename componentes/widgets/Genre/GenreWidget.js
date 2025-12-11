@@ -22,7 +22,7 @@ export default function GenresWidget({ selectedGenres, setSelectedGenres }) {
 
   // Debounce filter
   useEffect(() => {
-    if (!search.trim()) {
+    if (!search) {
       setFilteredGenres(Generos);
       return;
     }

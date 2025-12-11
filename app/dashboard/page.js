@@ -64,7 +64,7 @@ export default function DashboardPage() {
   };
 
   const buscarCancionesPlaylist = async (texto) => {
-    if (!texto.trim()) {
+    if (!texto) {
       setSongResults([]);
       return;
     }

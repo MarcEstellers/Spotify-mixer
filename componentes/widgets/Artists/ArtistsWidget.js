@@ -30,7 +30,7 @@ export default function ArtistsWidgets({ accessToken, favArt, SetFavArt, filtArt
 
   // Debounce
   useEffect(() => {
-    if (!texto.trim()) {
+    if (!texto) {
       setArtistas([]);
       setError("");
       return;

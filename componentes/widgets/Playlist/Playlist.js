@@ -19,7 +19,6 @@ const PlaylistDisplay = ({
   return (
     <div className="bg-[#121212] rounded-2xl p-6 text-[#f5f5f5] flex flex-col gap-5">
 
-      {/* 🔍 BUSCADOR */}
       <div className="bg-[#181818] border-2 border-white/5 rounded-xl p-4">
         <h3 className="text-base font-semibold mb-3">Añadir canciones manualmente</h3>
 
@@ -36,7 +35,6 @@ const PlaylistDisplay = ({
                      text-sm placeholder:text-white/50 outline-none"
         />
 
-        {/* Resultados */}
         {songResults?.length > 0 && (
           <div className="mt-3 max-h-64 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
 
